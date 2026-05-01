@@ -277,51 +277,6 @@ export default function App() {
               </div>
             )}
 
-            {/* AI Insight */}
-            {(insight || aiLoading) && (
-              <div style={{
-                ...glass.panel,
-                padding: 20,
-                borderColor: 'rgba(56,189,248,0.2)',
-                animation: 'fadeIn 0.4s ease',
-              }}>
-                <div style={{
-                  fontSize: 9, fontFamily: 'IBM Plex Mono', color: '#38bdf8',
-                  letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 12,
-                  display: 'flex', alignItems: 'center', gap: 8,
-                }}>
-                  <div style={{
-                    width: 6, height: 6, borderRadius: '50%',
-                    background: aiLoading ? '#f59e0b' : '#34d399',
-                    boxShadow: `0 0 8px ${aiLoading ? '#f59e0b' : '#34d399'}`,
-                    animation: aiLoading ? 'pulse 1s ease-in-out infinite' : 'none',
-                  }} />
-                  <span>AI Biological Interpretation</span>
-                  <div style={{ flex: 1, height: 1, background: 'rgba(56,189,248,0.12)' }} />
-                </div>
-                <div style={{
-                  fontSize: 12, lineHeight: 1.8,
-                  color: '#bae6fd',
-                  fontWeight: 300,
-                  whiteSpace: 'pre-wrap',
-                }}>
-                  {insight}
-                  {aiLoading && (
-                    <span style={{
-                      display: 'inline-block', width: 2, height: 14,
-                      background: '#38bdf8', marginLeft: 2,
-                      animation: 'blink 0.8s ease-in-out infinite',
-                      verticalAlign: 'middle',
-                    }} />
-                  )}
-                </div>
-                {!aiLoading && (
-                  <div style={{ marginTop: 10, fontSize: 9, color: '#4b7a63', fontFamily: 'IBM Plex Mono' }}>
-                    Powered by Llama 3.3 70B via Groq · Analysis may require experimental validation
-                  </div>
-                )}
-              </div>
-            )}
           </div>
 
           {/* ── RIGHT: CHARTS ── */}
@@ -531,6 +486,60 @@ export default function App() {
                     ))}
                   </div>
                 </div>
+                {/* AI Insight — right panel, below stability */}
+                {(insight || aiLoading) && (
+                  <div style={{
+                    ...glass.panel,
+                    padding: 20,
+                    borderColor: 'rgba(56,189,248,0.25)',
+                    animation: 'fadeIn 0.4s ease',
+                  }}>
+                    <div style={{
+                      fontSize: 9, fontFamily: 'IBM Plex Mono', color: '#38bdf8',
+                      letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 14,
+                      display: 'flex', alignItems: 'center', gap: 8,
+                    }}>
+                      <div style={{
+                        width: 6, height: 6, borderRadius: '50%',
+                        background: aiLoading ? '#f59e0b' : '#34d399',
+                        boxShadow: `0 0 10px ${aiLoading ? '#f59e0b' : '#34d399'}`,
+                        animation: aiLoading ? 'pulse 1s ease-in-out infinite' : 'none',
+                        flexShrink: 0,
+                      }} />
+                      <span>AI Biological Interpretation</span>
+                      <div style={{ flex: 1, height: 1, background: 'rgba(56,189,248,0.12)' }} />
+                    </div>
+                    <div style={{
+                      fontSize: 12.5,
+                      lineHeight: 1.85,
+                      color: '#bae6fd',
+                      fontWeight: 300,
+                      whiteSpace: 'pre-wrap',
+                    }}>
+                      {insight}
+                      {aiLoading && (
+                        <span style={{
+                          display: 'inline-block', width: 2, height: 14,
+                          background: '#38bdf8', marginLeft: 2,
+                          animation: 'blink 0.8s ease-in-out infinite',
+                          verticalAlign: 'middle',
+                        }} />
+                      )}
+                    </div>
+                    {!aiLoading && insight && (
+                      <div style={{
+                        marginTop: 12,
+                        paddingTop: 10,
+                        borderTop: '1px solid rgba(56,189,248,0.08)',
+                        fontSize: 9, color: '#4b7a63', fontFamily: 'IBM Plex Mono',
+                        display: 'flex', alignItems: 'center', gap: 6,
+                      }}>
+                        <span style={{ color: '#34d399' }}>✓</span>
+                        Powered by Llama 3.3 70B via Groq · Experimental validation recommended
+                      </div>
+                    )}
+                  </div>
+                )}
               </>
             )}
           </div>
